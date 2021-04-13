@@ -1,0 +1,87 @@
+header {
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.container {
+  margin-bottom: 1rem;
+}
+
+.link-star {
+  position: absolute;
+  right: 4.75rem;
+  top: 1.55rem;
+}
+
+.fav-link {
+  position: absolute;
+  right: 1rem;
+  top: 1.5rem;
+}
+
+.breeds-link {
+  position: absolute;
+  right: 7rem;
+  top: 1.5rem;
+}
+
+.title {
+  margin-left: 1rem;
+}
+
+.view-title {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+img {
+  height: 17rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  margin: 0 3rem;
+}
+
+.cat-name {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .fav-link {
+    right: 5rem;
+  }
+
+  .breeds-link {
+    right: 12.5rem;
+  }
+
+  .link-star {
+    right: 8.75rem;
+  }
+
+  .title {
+    margin-left: 5rem;
+  }
+
+  .row {
+    flex-direction: row;
+  }
+
+  .col-third {
+    width: calc(100% / 3);
+  }
+
+  img {
+    padding: 0 1.5rem;
+    height: 12rem;
+  }
+}
