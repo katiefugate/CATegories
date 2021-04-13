@@ -5,7 +5,6 @@ header {
 
 .container {
   margin: 0 3rem;
-  margin-bottom: 1rem;
 }
 
 .link-star {
@@ -36,15 +35,10 @@ header {
 }
 
 img {
-  height: 17rem;
+  padding: 0 2.5rem;
+  height: 13rem;
   margin-bottom: 2rem;
   width: 100%;
-}
-
-.row {
-  display: flex;
-  flex-direction: column;
-  margin: 0 3rem;
 }
 
 .cat-name {
@@ -73,10 +67,6 @@ img {
 
   .title {
     margin-left: 5rem;
-  }
-
-  .row {
-    flex-direction: row;
   }
 
   .col-third {
