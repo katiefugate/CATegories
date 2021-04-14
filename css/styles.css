@@ -1,0 +1,16 @@
+header {
+  background-color: #44a2a8;
+  color: white;
+}
+
+.cat-name,
+.view-title,
+.breeds-link,
+.fav-link {
+  font-family: 'rum raisin', sans-serif;
+}
+
+.title {
+  font-family: atma, cursive;
+  font-size: 2rem;
+}
