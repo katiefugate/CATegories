@@ -6,11 +6,45 @@ header {
 .cat-name,
 .view-title,
 .breeds-link,
-.fav-link {
+.fav-link,
+.info-name,
+h2 {
   font-family: 'rum raisin', sans-serif;
+}
+
+p {
+  font-family: 'Poor Story', cursive;
+  line-height: 1.5rem;
+  font-size: 1rem;
+}
+
+.info-temp,
+.info-des {
+  font-weight: 400;
 }
 
 .title {
   font-family: atma, cursive;
   font-size: 2rem;
+}
+
+.info-des {
+  border-bottom: 2px solid #44a2a8;
+  padding-bottom: 0.75rem;
+}
+
+.fa-star {
+  color: #44a2a8;
+  font-size: 2rem;
+}
+
+.link-star {
+  color: white;
+  font-size: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .info-des {
+    border-bottom: none;
+  }
 }

@@ -1,5 +1,7 @@
 
-var listView = document.querySelector('.breeds');
+var breedsList = document.querySelector('.breeds');
+var breedsView = document.querySelector('.breeds-view');
+
 var catbreeds = new XMLHttpRequest();
 catbreeds.open('GET', 'https://api.thecatapi.com/v1/breeds?attach_breed=0');
 catbreeds.setRequestHeader('x-api-key', '13ac2e7c-3a0a-4430-9b8f-e916a6297cd6');
@@ -7,7 +9,8 @@ catbreeds.addEventListener('load', function () {
   var catBreedsArr = JSON.parse(catbreeds.response);
   for (var i = 0; i < catBreedsArr.length; i++) {
     if (catBreedsArr[i].image !== undefined && catBreedsArr[i].image.url !== undefined) {
-      listView.appendChild(addCats(catBreedsArr[i]));
+      breedsList.appendChild(addCats(catBreedsArr[i]));
+      breedsView.className = 'breeds-view hidden';
     }
   }
 });
