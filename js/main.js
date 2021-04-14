@@ -2,6 +2,7 @@
 var breedsList = document.querySelector('.breeds');
 var breedsView = document.querySelector('.breeds-view');
 var infoViews = document.querySelector('.info-views');
+var header = document.querySelector('header');
 
 var catbreeds = new XMLHttpRequest();
 catbreeds.open('GET', 'https://api.thecatapi.com/v1/breeds?attach_breed=0');
@@ -182,3 +183,12 @@ function getInfo(event) {
 }
 
 breedsView.addEventListener('click', getInfo);
+
+function linksHandler(event) {
+  if (event.target.className === 'breeds-link' || event.target.className === 'title') {
+    breedsView.className = 'breeds-view';
+    infoViews.className = 'info-views hidden';
+  }
+}
+
+header.addEventListener('click', linksHandler);

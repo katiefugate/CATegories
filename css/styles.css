@@ -44,7 +44,9 @@ p {
 }
 
 .cat-name:hover,
-.cat-img:hover {
+.cat-img:hover,
+.title:hover,
+.breeds-link:hover {
   cursor: pointer;
 }
 
