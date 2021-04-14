@@ -121,7 +121,6 @@ h2 {
   .col-half.half {
     display: flex;
     flex-wrap: wrap;
-    flex-basis: 50%;
     margin-left: 2rem;
   }
 
