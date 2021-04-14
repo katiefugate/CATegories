@@ -43,6 +43,11 @@ p {
   font-size: 1rem;
 }
 
+.cat-name:hover,
+.cat-img:hover {
+  cursor: pointer;
+}
+
 @media screen and (min-width: 768px) {
   .info-des {
     border-bottom: none;
