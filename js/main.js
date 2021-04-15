@@ -3,18 +3,20 @@ var breedsList = document.querySelector('.breeds');
 var breedsView = document.querySelector('.breeds-view');
 var infoViews = document.querySelector('.info-views');
 var header = document.querySelector('header');
+var catData = null;
 
 var catbreeds = new XMLHttpRequest();
 catbreeds.open('GET', 'https://api.thecatapi.com/v1/breeds?attach_breed=0');
 catbreeds.setRequestHeader('x-api-key', '13ac2e7c-3a0a-4430-9b8f-e916a6297cd6');
 catbreeds.addEventListener('load', function () {
   var catBreedsArr = JSON.parse(catbreeds.response);
+  catData = catBreedsArr;
   for (var i = 0; i < catBreedsArr.length; i++) {
     if (catBreedsArr[i].image !== undefined && catBreedsArr[i].image.url !== undefined) {
       breedsList.appendChild(addCats(catBreedsArr[i]));
       breedsView.className = 'breeds-view';
-      infoViews.appendChild(addCatInfo(catBreedsArr[i]));
-      infoViews.className = 'info-views hidden';
+      // infoViews.appendChild(addCatInfo(catBreedsArr[i]));
+      infoViews.className = 'info-views';
     }
   }
 });
@@ -35,16 +37,14 @@ function addCats(eachCat) {
   return col;
 }
 
-function addCatInfo(eachCat) {
+function addCatInfoView() {
   var infoViewContainer = document.createElement('div');
   infoViewContainer.className = 'info-view-container';
-  infoViewContainer.dataset.view = eachCat.name;
 
   var infoNameContainer = document.createElement('div');
   infoNameContainer.className = 'info-name-container';
 
   var infoName = document.createElement('h1');
-  infoName.textContent = eachCat.name;
   infoName.className = 'info-name';
 
   var star = document.createElement('i');
@@ -56,7 +56,6 @@ function addCatInfo(eachCat) {
 
   var temperament = document.createElement('p');
   temperament.className = 'info-temp';
-  temperament.textContent = eachCat.temperament;
   infoViewContainer.appendChild(temperament);
 
   var infoRow = document.createElement('div');
@@ -67,11 +66,9 @@ function addCatInfo(eachCat) {
 
   var infoImg = document.createElement('img');
   infoImg.className = 'info-img';
-  infoImg.setAttribute('src', eachCat.image.url);
 
   var infoDes = document.createElement('p');
   infoDes.className = 'info-des';
-  infoDes.textContent = eachCat.description;
 
   imgDesCol.appendChild(infoImg);
   imgDesCol.appendChild(infoDes);
@@ -87,8 +84,7 @@ function addCatInfo(eachCat) {
   weightName.textContent = 'Weight';
 
   var weightValue = document.createElement('p');
-  weightValue.textContent = eachCat.weight.imperial + ' pounds';
-  weightValue.className = 'info-value';
+  weightValue.className = 'info-value weight';
 
   weightCol.appendChild(weightName);
   weightCol.appendChild(weightValue);
@@ -101,8 +97,7 @@ function addCatInfo(eachCat) {
   lifeSpanName.textContent = 'Life Span';
 
   var lifeSpanValue = document.createElement('p');
-  lifeSpanValue.textContent = eachCat.life_span + ' years';
-  lifeSpanValue.className = 'info-value';
+  lifeSpanValue.className = 'info-value life-span';
 
   lifeSpanCol.appendChild(lifeSpanName);
   lifeSpanCol.appendChild(lifeSpanValue);
@@ -115,12 +110,7 @@ function addCatInfo(eachCat) {
   energyLevelName.textContent = 'Energy Level';
 
   var energyLevelValue = document.createElement('div');
-  energyLevelValue.className = 'paws';
-  for (var i = eachCat.energy_level; i > 0; i--) {
-    var paw = document.createElement('i');
-    paw.className = 'fas fa-paw';
-    energyLevelValue.appendChild(paw);
-  }
+  energyLevelValue.className = 'paws energy';
 
   energyLevelCol.appendChild(energyLevelName);
   energyLevelCol.appendChild(energyLevelValue);
@@ -133,12 +123,7 @@ function addCatInfo(eachCat) {
   affectionName.textContent = 'Affection';
 
   var affectionValue = document.createElement('div');
-  affectionValue.className = 'paws';
-  for (i = eachCat.affection_level; i > 0; i--) {
-    paw = document.createElement('i');
-    paw.className = 'fas fa-paw';
-    affectionValue.appendChild(paw);
-  }
+  affectionValue.className = 'paws affection';
 
   affectionCol.appendChild(affectionName);
   affectionCol.appendChild(affectionValue);
@@ -151,12 +136,7 @@ function addCatInfo(eachCat) {
   childFriendlyName.textContent = 'Child Friendly';
 
   var childFriendlyValue = document.createElement('div');
-  childFriendlyValue.className = 'paws';
-  for (i = eachCat.child_friendly; i > 0; i--) {
-    paw = document.createElement('i');
-    paw.className = 'fas fa-paw';
-    childFriendlyValue.appendChild(paw);
-  }
+  childFriendlyValue.className = 'paws child-friendly';
 
   childFriendlyCol.appendChild(childFriendlyName);
   childFriendlyCol.appendChild(childFriendlyValue);
@@ -167,16 +147,55 @@ function addCatInfo(eachCat) {
   return infoViewContainer;
 }
 
+infoViews.appendChild(addCatInfoView());
+
+function renderCatListItem(cat) {
+  var infoViewContainer = document.querySelector('.info-view-container');
+  var infoName = document.querySelector('.info-name');
+  var temperament = document.querySelector('.info-temp');
+  var infoImg = document.querySelector('.info-img');
+  var infoDes = document.querySelector('.info-des');
+  var weightValue = document.querySelector('.weight');
+  var lifeSpanValue = document.querySelector('.life-span');
+  var energyLevelValue = document.querySelector('.energy');
+  var affectionValue = document.querySelector('.affection');
+  var childFriendlyValue = document.querySelector('.child-friendly');
+  infoViewContainer.dataset.view = cat.name;
+  infoName.textContent = cat.name;
+  temperament.textContent = cat.temperament;
+  infoImg.setAttribute('src', cat.image.url);
+  infoDes.textContent = cat.description;
+  weightValue.textContent = cat.weight.imperial + ' pounds';
+  lifeSpanValue.textContent = cat.life_span + ' years';
+
+  energyLevelValue.textContent = '';
+  for (var i = cat.energy_level; i > 0; i--) {
+    var paw = document.createElement('i');
+    paw.className = 'fas fa-paw';
+    energyLevelValue.appendChild(paw);
+  }
+  affectionValue.textContent = '';
+  for (i = cat.affection_level; i > 0; i--) {
+    paw = document.createElement('i');
+    paw.className = 'fas fa-paw';
+    affectionValue.appendChild(paw);
+  }
+  childFriendlyValue.textContent = '';
+  for (i = cat.child_friendly; i > 0; i--) {
+    paw = document.createElement('i');
+    paw.className = 'fas fa-paw';
+    childFriendlyValue.appendChild(paw);
+  }
+
+}
+
 function getInfo(event) {
-  var infoViewsList = document.querySelectorAll('.info-view-container');
   if (event.target.className === 'cat-name' || event.target.className === 'cat-img') {
-    for (var i = 0; i < infoViewsList.length; i++) {
-      if (infoViewsList[i].dataset.view === event.target.parentNode.dataset.view) {
+    for (var i = 0; i < catData.length; i++) {
+      if (catData[i].name === event.target.parentNode.dataset.view) {
+        renderCatListItem(catData[i]);
+        infoViews.className = 'info-view-container';
         breedsView.className = 'breeds-view hidden';
-        infoViews.className = 'info-views';
-        infoViewsList[i].className = 'info-view-container';
-      } else {
-        infoViewsList[i].className = 'info-view-container hidden';
       }
     }
   }
