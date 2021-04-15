@@ -1,3 +1,7 @@
+.hidden {
+  display: none;
+}
+
 header {
   position: relative;
   padding: 0.5rem 0;
@@ -7,6 +11,10 @@ header {
 
 .container {
   margin: 0 3rem;
+}
+
+.info-view-container {
+  margin: 1rem 2rem;
 }
 
 .links {
@@ -39,6 +47,44 @@ img {
   text-align: center;
 }
 
+.info-name,
+.info-temp,
+.info-des {
+  text-align: center;
+}
+
+.paws {
+  letter-spacing: 0.75rem;
+}
+
+.info-name,
+h2 {
+  margin-bottom: 0;
+}
+
+.info-img {
+  margin-bottom: 1rem;
+}
+
+.info-temp,
+.info-des,
+.info-value {
+  margin-top: 0;
+}
+
+.info-name {
+  display: inline;
+  padding-right: 0.5rem;
+}
+
+.info-name-container {
+  text-align: center;
+}
+
+.info-des {
+  margin: 0 2.5rem;
+}
+
 @media screen and (min-width: 768px) {
   .container {
     max-width: 1000px;
@@ -62,5 +108,28 @@ img {
   img {
     padding: 0 1.5rem;
     height: 12rem;
+  }
+
+  .info-row {
+    display: flex;
+  }
+
+  .col-half {
+    width: 50%;
+  }
+
+  .col-half.half {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 2rem;
+  }
+
+  .col-full {
+    width: 100%;
+    transform: translate(25%);
+  }
+
+  .info-temp {
+    margin-bottom: 4rem;
   }
 }
