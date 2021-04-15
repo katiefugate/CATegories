@@ -196,8 +196,8 @@ function renderCatFavItem(cat) {
 }
 
 function getInfo(event) {
-  if (event.target.className === 'cat-name' || event.target.className === 'cat-img') {
-    for (var i = 0; i < catData.length; i++) {
+  for (var i = 0; i < catData.length; i++) {
+    if (event.target.className === 'cat-name' || event.target.className === 'cat-img') {
       if (catData[i].name === event.target.parentNode.dataset.view) {
         infoViews.textContent = '';
         infoViews.appendChild(renderCatDetailView(catData[i]));
@@ -205,17 +205,13 @@ function getInfo(event) {
         breedsView.className = 'breeds-view hidden';
         favView.className = 'fav-view hidden';
       }
-    }
-  } else if (event.target.className === 'far fa-star') {
-    for (i = 0; i < catData.length; i++) {
+    } else if (event.target.className === 'far fa-star') {
       if (catData[i].name === event.target.parentNode.parentNode.dataset.view) {
         data.favorites.push(catData[i]);
         favContainer.appendChild(renderCatFavItem(catData[i]));
         event.target.className = 'fas fa-star';
       }
-    }
-  } else if (event.target.className === 'cat-name fav') {
-    for (i = 0; i < catData.length; i++) {
+    } else if (event.target.className === 'cat-name fav') {
       if (event.target.parentNode.parentNode.dataset.view === catData[i].name) {
         infoViews.textContent = '';
         infoViews.appendChild(renderCatDetailView(catData[i]));
