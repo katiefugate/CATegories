@@ -51,6 +51,7 @@ function renderCatDetailView(cat) {
 
   var star = document.createElement('i');
   star.className = 'far fa-star';
+  star.dataset.name = cat.name;
   for (var i = 0; i < data.favorites.length; i++) {
     if (data.favorites[i].name === cat.name) {
       star.className = 'fas fa-star';
@@ -184,10 +185,11 @@ function renderCatFavItem(cat) {
   nameContainer.appendChild(favStar);
   col.appendChild(nameContainer);
   col.appendChild(catImg);
-  col.className = 'col-third';
+  col.className = 'col-third fav-item';
   nameContainer.className = 'fav-name-container';
   catName.className = 'cat-name fav';
   favStar.className = 'fas fa-star fav';
+  favStar.dataset.name = cat.name;
   catImg.className = 'cat-img';
   catName.textContent = cat.name;
   col.dataset.view = cat.name;
@@ -218,6 +220,15 @@ function getInfo(event) {
         infoViews.className = 'info-view';
         breedsView.className = 'breeds-view hidden';
         favView.className = 'fav-view hidden';
+      }
+    }
+  }
+  var favList = document.querySelectorAll('.fav-item');
+  if (event.target.className === 'fas fa-star fav') {
+    for (i = 0; i < data.favorites.length; i++) {
+      if (data.favorites[i].name === event.target.dataset.name) {
+        data.favorites.splice(i, 1);
+        favList[i].remove();
       }
     }
   }
