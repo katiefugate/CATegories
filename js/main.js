@@ -2,6 +2,7 @@
 var breedsList = document.querySelector('.breeds');
 var breedsView = document.querySelector('.breeds-view');
 var infoViews = document.querySelector('.info-views');
+var favView = document.querySelector('.fav-view');
 var header = document.querySelector('header');
 var catData = null;
 
@@ -168,6 +169,27 @@ function renderCatDetailView(cat) {
   return infoViewContainer;
 }
 
+function renderCatFavItem(cat) {
+  var col = document.createElement('div');
+  var nameContainer = document.createElement('div');
+  var catName = document.createElement('h3');
+  var favStar = document.createElement('i');
+  var catImg = document.createElement('img');
+  nameContainer.appendChild(catName);
+  nameContainer.appendChild(favStar);
+  col.appendChild(nameContainer);
+  col.appendChild(catImg);
+  col.className = 'col-third';
+  nameContainer.className = 'fav-name-container';
+  catName.className = 'cat-name fav';
+  favStar.className = 'fas fa-star fav';
+  catImg.className = 'cat-img';
+  catName.textContent = cat.name;
+  col.dataset.view = cat.name;
+  catImg.setAttribute('src', cat.image.url);
+  return col;
+}
+
 function getInfo(event) {
   if (event.target.className === 'cat-name' || event.target.className === 'cat-img') {
     for (var i = 0; i < catData.length; i++) {
@@ -176,6 +198,14 @@ function getInfo(event) {
         infoViews.appendChild(renderCatDetailView(catData[i]));
         infoViews.className = 'info-view';
         breedsView.className = 'breeds-view hidden';
+      }
+    }
+  } else if (event.target.className === 'far fa-star') {
+    for (i = 0; i < catData.length; i++) {
+      if (catData[i].name === event.target.parentNode.parentNode.dataset.view) {
+        data.favorites.push(catData[i]);
+        favView.appendChild(renderCatFavItem(catData[i]));
+        event.target.className = 'fas fa-star';
       }
     }
   }
@@ -191,3 +221,5 @@ function linksHandler(event) {
 }
 
 header.addEventListener('click', linksHandler);
+
+infoViews.addEventListener('click', getInfo);
