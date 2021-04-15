@@ -72,12 +72,18 @@ h2 {
   margin-top: 0;
 }
 
-.info-name {
+.info-name,
+.cat-name.fav {
   display: inline;
   padding-right: 0.5rem;
 }
 
-.info-name-container {
+.fav-name-container {
+  padding-top: 1rem;
+}
+
+.info-name-container,
+.fav-name-container {
   text-align: center;
 }
 
