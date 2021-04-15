@@ -13,16 +13,15 @@ catbreeds.addEventListener('load', function () {
   catData = catBreedsArr;
   for (var i = 0; i < catBreedsArr.length; i++) {
     if (catBreedsArr[i].image !== undefined && catBreedsArr[i].image.url !== undefined) {
-      breedsList.appendChild(addCats(catBreedsArr[i]));
+      breedsList.appendChild(renderCatListItem(catBreedsArr[i]));
       breedsView.className = 'breeds-view';
-      // infoViews.appendChild(addCatInfo(catBreedsArr[i]));
       infoViews.className = 'info-views';
     }
   }
 });
 catbreeds.send();
 
-function addCats(eachCat) {
+function renderCatListItem(eachCat) {
   var col = document.createElement('div');
   var catName = document.createElement('h3');
   var catImg = document.createElement('img');
@@ -37,15 +36,17 @@ function addCats(eachCat) {
   return col;
 }
 
-function addCatInfoView() {
+function renderCatDetailView(cat) {
   var infoViewContainer = document.createElement('div');
   infoViewContainer.className = 'info-view-container';
+  infoViewContainer.dataset.view = cat.name;
 
   var infoNameContainer = document.createElement('div');
   infoNameContainer.className = 'info-name-container';
 
   var infoName = document.createElement('h1');
   infoName.className = 'info-name';
+  infoName.textContent = cat.name;
 
   var star = document.createElement('i');
   star.className = 'far fa-star';
@@ -56,6 +57,7 @@ function addCatInfoView() {
 
   var temperament = document.createElement('p');
   temperament.className = 'info-temp';
+  temperament.textContent = cat.temperament;
   infoViewContainer.appendChild(temperament);
 
   var infoRow = document.createElement('div');
@@ -66,9 +68,11 @@ function addCatInfoView() {
 
   var infoImg = document.createElement('img');
   infoImg.className = 'info-img';
+  infoImg.setAttribute('src', cat.image.url);
 
   var infoDes = document.createElement('p');
   infoDes.className = 'info-des';
+  infoDes.textContent = cat.description;
 
   imgDesCol.appendChild(infoImg);
   imgDesCol.appendChild(infoDes);
@@ -85,6 +89,7 @@ function addCatInfoView() {
 
   var weightValue = document.createElement('p');
   weightValue.className = 'info-value weight';
+  weightValue.textContent = cat.weight.imperial + ' pounds';
 
   weightCol.appendChild(weightName);
   weightCol.appendChild(weightValue);
@@ -98,6 +103,7 @@ function addCatInfoView() {
 
   var lifeSpanValue = document.createElement('p');
   lifeSpanValue.className = 'info-value life-span';
+  lifeSpanValue.textContent = cat.life_span + ' years';
 
   lifeSpanCol.appendChild(lifeSpanName);
   lifeSpanCol.appendChild(lifeSpanValue);
@@ -111,6 +117,11 @@ function addCatInfoView() {
 
   var energyLevelValue = document.createElement('div');
   energyLevelValue.className = 'paws energy';
+  for (var i = cat.energy_level; i > 0; i--) {
+    var paw = document.createElement('i');
+    paw.className = 'fas fa-paw';
+    energyLevelValue.appendChild(paw);
+  }
 
   energyLevelCol.appendChild(energyLevelName);
   energyLevelCol.appendChild(energyLevelValue);
@@ -124,6 +135,11 @@ function addCatInfoView() {
 
   var affectionValue = document.createElement('div');
   affectionValue.className = 'paws affection';
+  for (i = cat.affection_level; i > 0; i--) {
+    paw = document.createElement('i');
+    paw.className = 'fas fa-paw';
+    affectionValue.appendChild(paw);
+  }
 
   affectionCol.appendChild(affectionName);
   affectionCol.appendChild(affectionValue);
@@ -137,6 +153,11 @@ function addCatInfoView() {
 
   var childFriendlyValue = document.createElement('div');
   childFriendlyValue.className = 'paws child-friendly';
+  for (i = cat.child_friendly; i > 0; i--) {
+    paw = document.createElement('i');
+    paw.className = 'fas fa-paw';
+    childFriendlyValue.appendChild(paw);
+  }
 
   childFriendlyCol.appendChild(childFriendlyName);
   childFriendlyCol.appendChild(childFriendlyValue);
@@ -147,54 +168,13 @@ function addCatInfoView() {
   return infoViewContainer;
 }
 
-infoViews.appendChild(addCatInfoView());
-
-function renderCatListItem(cat) {
-  var infoViewContainer = document.querySelector('.info-view-container');
-  var infoName = document.querySelector('.info-name');
-  var temperament = document.querySelector('.info-temp');
-  var infoImg = document.querySelector('.info-img');
-  var infoDes = document.querySelector('.info-des');
-  var weightValue = document.querySelector('.weight');
-  var lifeSpanValue = document.querySelector('.life-span');
-  var energyLevelValue = document.querySelector('.energy');
-  var affectionValue = document.querySelector('.affection');
-  var childFriendlyValue = document.querySelector('.child-friendly');
-  infoViewContainer.dataset.view = cat.name;
-  infoName.textContent = cat.name;
-  temperament.textContent = cat.temperament;
-  infoImg.setAttribute('src', cat.image.url);
-  infoDes.textContent = cat.description;
-  weightValue.textContent = cat.weight.imperial + ' pounds';
-  lifeSpanValue.textContent = cat.life_span + ' years';
-
-  energyLevelValue.textContent = '';
-  for (var i = cat.energy_level; i > 0; i--) {
-    var paw = document.createElement('i');
-    paw.className = 'fas fa-paw';
-    energyLevelValue.appendChild(paw);
-  }
-  affectionValue.textContent = '';
-  for (i = cat.affection_level; i > 0; i--) {
-    paw = document.createElement('i');
-    paw.className = 'fas fa-paw';
-    affectionValue.appendChild(paw);
-  }
-  childFriendlyValue.textContent = '';
-  for (i = cat.child_friendly; i > 0; i--) {
-    paw = document.createElement('i');
-    paw.className = 'fas fa-paw';
-    childFriendlyValue.appendChild(paw);
-  }
-
-}
-
 function getInfo(event) {
   if (event.target.className === 'cat-name' || event.target.className === 'cat-img') {
     for (var i = 0; i < catData.length; i++) {
       if (catData[i].name === event.target.parentNode.dataset.view) {
-        renderCatListItem(catData[i]);
-        infoViews.className = 'info-view-container';
+        infoViews.textContent = '';
+        infoViews.appendChild(renderCatDetailView(catData[i]));
+        infoViews.className = 'info-view';
         breedsView.className = 'breeds-view hidden';
       }
     }
