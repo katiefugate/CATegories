@@ -4,6 +4,7 @@ var breedsView = document.querySelector('.breeds-view');
 var infoViews = document.querySelector('.info-views');
 var favView = document.querySelector('.fav-view');
 var header = document.querySelector('header');
+var favContainer = document.querySelector('.fav.container');
 var catData = null;
 
 var catbreeds = new XMLHttpRequest();
@@ -15,7 +16,6 @@ catbreeds.addEventListener('load', function () {
   for (var i = 0; i < catBreedsArr.length; i++) {
     if (catBreedsArr[i].image !== undefined && catBreedsArr[i].image.url !== undefined) {
       breedsList.appendChild(renderCatListItem(catBreedsArr[i]));
-      breedsView.className = 'breeds-view';
       infoViews.className = 'info-views';
     }
   }
@@ -51,6 +51,11 @@ function renderCatDetailView(cat) {
 
   var star = document.createElement('i');
   star.className = 'far fa-star';
+  for (var i = 0; i < data.favorites.length; i++) {
+    if (data.favorites[i].name === cat.name) {
+      star.className = 'fas fa-star';
+    }
+  }
 
   infoNameContainer.appendChild(infoName);
   infoNameContainer.appendChild(star);
@@ -118,7 +123,7 @@ function renderCatDetailView(cat) {
 
   var energyLevelValue = document.createElement('div');
   energyLevelValue.className = 'paws energy';
-  for (var i = cat.energy_level; i > 0; i--) {
+  for (i = cat.energy_level; i > 0; i--) {
     var paw = document.createElement('i');
     paw.className = 'fas fa-paw';
     energyLevelValue.appendChild(paw);
@@ -198,14 +203,25 @@ function getInfo(event) {
         infoViews.appendChild(renderCatDetailView(catData[i]));
         infoViews.className = 'info-view';
         breedsView.className = 'breeds-view hidden';
+        favView.className = 'fav-view hidden';
       }
     }
   } else if (event.target.className === 'far fa-star') {
     for (i = 0; i < catData.length; i++) {
       if (catData[i].name === event.target.parentNode.parentNode.dataset.view) {
         data.favorites.push(catData[i]);
-        favView.appendChild(renderCatFavItem(catData[i]));
+        favContainer.appendChild(renderCatFavItem(catData[i]));
         event.target.className = 'fas fa-star';
+      }
+    }
+  } else if (event.target.className === 'cat-name fav') {
+    for (i = 0; i < catData.length; i++) {
+      if (event.target.parentNode.parentNode.dataset.view === catData[i].name) {
+        infoViews.textContent = '';
+        infoViews.appendChild(renderCatDetailView(catData[i]));
+        infoViews.className = 'info-view';
+        breedsView.className = 'breeds-view hidden';
+        favView.className = 'fav-view hidden';
       }
     }
   }
@@ -217,9 +233,35 @@ function linksHandler(event) {
   if (event.target.className === 'breeds-link' || event.target.className === 'title') {
     breedsView.className = 'breeds-view';
     infoViews.className = 'info-views hidden';
+    favView.className = 'fav-view hidden';
+    data.view = 'breeds';
+  } else if (event.target.className === 'fav-link' || event.target.className === 'fas fa-star link-star') {
+    favView.className = 'fav-view';
+    infoViews.className = 'info-views hidden';
+    breedsView.className = 'breeds-view hidden';
+    data.view = 'fav';
   }
 }
 
 header.addEventListener('click', linksHandler);
 
 infoViews.addEventListener('click', getInfo);
+
+favContainer.addEventListener('click', getInfo);
+
+function contentLoadHandler(event) {
+  for (var i = 0; i < data.favorites.length; i++) {
+    favContainer.appendChild(renderCatFavItem(data.favorites[i]));
+  }
+  if (data.view === 'breeds') {
+    breedsView.className = 'breeds-view';
+    infoViews.className = 'info-views hidden';
+    favView.className = 'fav-view hidden';
+  } else if (data.view === 'fav') {
+    favView.className = 'fav-view';
+    infoViews.className = 'info-views hidden';
+    breedsView.className = 'breeds-view hidden';
+  }
+}
+
+window.addEventListener('DOMContentLoaded', contentLoadHandler);

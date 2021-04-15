@@ -45,7 +45,9 @@ p {
 .cat-name:hover,
 .cat-img:hover,
 .title:hover,
-.breeds-link:hover {
+.breeds-link:hover,
+.fav-link:hover,
+.fa-star:hover {
   cursor: pointer;
 }
 
