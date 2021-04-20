@@ -207,12 +207,6 @@ function getInfo(event) {
         breedsView.className = 'breeds-view hidden';
         favView.className = 'fav-view hidden';
       }
-    } else if (event.target.className === 'far fa-star') {
-      if (catData[i].name === event.target.parentNode.parentNode.dataset.view) {
-        data.favorites.push(catData[i]);
-        favContainer.appendChild(renderCatFavItem(catData[i]));
-        event.target.className = 'fas fa-star';
-      }
     } else if (event.target.className === 'cat-name fav') {
       if (event.target.parentNode.parentNode.dataset.view === catData[i].name) {
         infoViews.textContent = '';
@@ -224,11 +218,20 @@ function getInfo(event) {
     }
   }
   var favList = document.querySelectorAll('.fav-item');
-  if (event.target.className === 'fas fa-star fav') {
+  if (event.target.className === 'far fa-star') {
+    for (i = 0; i < catData.length; i++) {
+      if (catData[i].name === event.target.parentNode.parentNode.dataset.view) {
+        data.favorites.push(catData[i]);
+        favContainer.appendChild(renderCatFavItem(catData[i]));
+        event.target.className = 'fas fa-star';
+      }
+    }
+  } else if (event.target.className === 'fas fa-star fav' || event.target.className === 'fas fa-star') {
     for (i = 0; i < data.favorites.length; i++) {
       if (data.favorites[i].name === event.target.dataset.name) {
         data.favorites.splice(i, 1);
         favList[i].remove();
+        event.target.className = 'far fa-star';
       }
     }
   }
