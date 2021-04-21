@@ -5,6 +5,9 @@ var infoViews = document.querySelector('.info-views');
 var favView = document.querySelector('.fav-view');
 var header = document.querySelector('header');
 var favContainer = document.querySelector('.fav.container');
+var factView = document.querySelector('.fact-view');
+var factButton = document.querySelector('.fact-button');
+var fact = document.querySelector('.fact');
 var catData = null;
 
 var catbreeds = new XMLHttpRequest();
@@ -244,12 +247,20 @@ function linksHandler(event) {
     breedsView.className = 'breeds-view';
     infoViews.className = 'info-views hidden';
     favView.className = 'fav-view hidden';
+    factView.className = 'fact-view hidden';
     data.view = 'breeds';
   } else if (event.target.className === 'fav-link' || event.target.className === 'fas fa-star link-star') {
     favView.className = 'fav-view';
     infoViews.className = 'info-views hidden';
     breedsView.className = 'breeds-view hidden';
+    factView.className = 'fact-view hidden';
     data.view = 'fav';
+  } else if (event.target.className === 'fact-link') {
+    factView.className = 'fact-view';
+    favView.className = 'fav-view hidden';
+    infoViews.className = 'info-views hidden';
+    breedsView.className = 'breeds-view hidden';
+    data.view = 'fact';
   }
 }
 
@@ -267,11 +278,31 @@ function contentLoadHandler(event) {
     breedsView.className = 'breeds-view';
     infoViews.className = 'info-views hidden';
     favView.className = 'fav-view hidden';
+    factView.className = 'fact-view hidden';
   } else if (data.view === 'fav') {
     favView.className = 'fav-view';
+    infoViews.className = 'info-views hidden';
+    breedsView.className = 'breeds-view hidden';
+    factView.className = 'fact-view hidden';
+  } else if (data.view === 'fact') {
+    factView.className = 'fact-view';
+    favView.className = 'fav-view hidden';
     infoViews.className = 'info-views hidden';
     breedsView.className = 'breeds-view hidden';
   }
 }
 
 window.addEventListener('DOMContentLoaded', contentLoadHandler);
+
+function factButtonHandler(event) {
+  var catFact = new XMLHttpRequest();
+  catFact.open('GET', 'https://catfact.ninja/fact?max_length=140');
+  catFact.addEventListener('load', function () {
+    var catFactObj = JSON.parse(catFact.response);
+    var newFact = catFactObj.fact;
+    fact.textContent = newFact;
+  });
+  catFact.send();
+}
+
+factButton.addEventListener('click', factButtonHandler);
