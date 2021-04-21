@@ -8,7 +8,9 @@ header {
 .breeds-link,
 .fav-link,
 .info-name,
-h2 {
+h2,
+.fact,
+.fact-button {
   font-family: 'rum raisin', sans-serif;
 }
 
@@ -51,8 +53,27 @@ p {
   cursor: pointer;
 }
 
+.fact-button {
+  padding: 0.5rem 1.75rem;
+  background-color: #44a2a8;
+  border: 1px solid #44a2a8;
+  color: white;
+}
+
 @media screen and (min-width: 768px) {
   .info-des {
     border-bottom: none;
+  }
+
+  .fact-button {
+    font-size: 1.5rem;
+  }
+
+  .fact-title {
+    font-size: 2.5rem;
+  }
+
+  .fact {
+    font-size: 1.5rem;
   }
 }

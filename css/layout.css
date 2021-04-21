@@ -91,6 +91,21 @@ h2 {
   margin: 0 2.5rem;
 }
 
+.fact {
+  text-align: center;
+  padding: 3rem 7.5rem;
+  line-height: 1.75rem;
+}
+
+.fact-title {
+  padding-top: 2rem;
+}
+
+.button-container {
+  text-align: center;
+  padding-top: 2rem;
+}
+
 @media screen and (min-width: 768px) {
   .container {
     max-width: 1000px;
@@ -137,5 +152,17 @@ h2 {
 
   .info-temp {
     margin-bottom: 4rem;
+  }
+
+  .fact-button {
+    padding: 0.75rem 2.75rem;
+  }
+
+  .fact-title {
+    padding-bottom: 2rem;
+  }
+
+  .fact {
+    padding-bottom: 5rem;
   }
 }
