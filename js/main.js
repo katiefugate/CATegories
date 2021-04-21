@@ -247,11 +247,13 @@ function linksHandler(event) {
     breedsView.className = 'breeds-view';
     infoViews.className = 'info-views hidden';
     favView.className = 'fav-view hidden';
+    factView.className = 'fact-view hidden';
     data.view = 'breeds';
   } else if (event.target.className === 'fav-link' || event.target.className === 'fas fa-star link-star') {
     favView.className = 'fav-view';
     infoViews.className = 'info-views hidden';
     breedsView.className = 'breeds-view hidden';
+    factView.className = 'fact-view hidden';
     data.view = 'fav';
   } else if (event.target.className === 'fact-link') {
     factView.className = 'fact-view';
