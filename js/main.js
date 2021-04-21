@@ -258,6 +258,7 @@ function linksHandler(event) {
     favView.className = 'fav-view hidden';
     infoViews.className = 'info-views hidden';
     breedsView.className = 'breeds-view hidden';
+    data.view = 'fact';
   }
 }
 
@@ -275,8 +276,15 @@ function contentLoadHandler(event) {
     breedsView.className = 'breeds-view';
     infoViews.className = 'info-views hidden';
     favView.className = 'fav-view hidden';
+    factView.className = 'fact-view hidden';
   } else if (data.view === 'fav') {
     favView.className = 'fav-view';
+    infoViews.className = 'info-views hidden';
+    breedsView.className = 'breeds-view hidden';
+    factView.className = 'fact-view hidden';
+  } else if (data.view === 'fact') {
+    factView.className = 'fact-view';
+    favView.className = 'fav-view hidden';
     infoViews.className = 'info-views hidden';
     breedsView.className = 'breeds-view hidden';
   }
