@@ -10,7 +10,8 @@ header {
 .info-name,
 h2,
 .fact,
-.fact-button {
+.fact-button,
+.fact-link {
   font-family: 'rum raisin', sans-serif;
 }
 
@@ -44,20 +45,26 @@ p {
   font-size: 1rem;
 }
 
-.cat-name:hover,
-.cat-img:hover,
-.title:hover,
-.breeds-link:hover,
-.fav-link:hover,
-.fa-star:hover {
-  cursor: pointer;
-}
-
 .fact-button {
   padding: 0.5rem 1.75rem;
   background-color: #44a2a8;
   border: 1px solid #44a2a8;
   color: white;
+}
+
+.cat-name:hover,
+.cat-img:hover,
+.title:hover,
+.breeds-link:hover,
+.fav-link:hover,
+.fa-star:hover,
+.fact-link:hover,
+.fact-button:hover {
+  cursor: pointer;
+}
+
+.fact-button:focus {
+  outline: none;
 }
 
 @media screen and (min-width: 768px) {

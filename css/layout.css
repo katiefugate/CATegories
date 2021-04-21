@@ -22,7 +22,8 @@ header {
   align-self: center;
 }
 
-.breeds-link {
+.breeds-link,
+.fact-link {
   padding-right: 1rem;
 }
 
