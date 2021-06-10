@@ -14,7 +14,6 @@ A dynamic HTML, CSS, and JavaScript solo app for users to find information on di
 
 
 
-![Screen Shot 2021-06-10 at 10 33 39 AM](https://user-images.githubusercontent.com/78885956/121572806-68e73080-c9d9-11eb-91d0-0b9608fc5d21.png)
-![Screen Shot 2021-06-10 at 10 33 58 AM](https://user-images.githubusercontent.com/78885956/121572810-6a185d80-c9d9-11eb-915a-a02369665947.png)
-![Screen Shot 2021-06-10 at 10 34 20 AM](https://user-images.githubusercontent.com/78885956/121572812-6ab0f400-c9d9-11eb-9b76-f9908df7c74d.png)
+<img width="238" alt="Screen Shot 2021-06-10 at 10 52 04 AM" src="https://user-images.githubusercontent.com/78885956/121573386-122e2680-c9da-11eb-8688-cc3c9af0f753.png"> <img width="240" alt="Screen Shot 2021-06-10 at 10 52 22 AM" src="https://user-images.githubusercontent.com/78885956/121573391-13f7ea00-c9da-11eb-9ec7-8cd81e1dfd0e.png"> <img width="238" alt="Screen Shot 2021-06-10 at 10 52 46 AM" src="https://user-images.githubusercontent.com/78885956/121573398-14908080-c9da-11eb-8f70-45f33a937b28.png">
+
 
