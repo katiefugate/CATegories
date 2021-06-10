@@ -5,12 +5,11 @@
 header {
   position: relative;
   padding: 0.5rem 0;
-  display: flex;
-  justify-content: space-between;
+  text-align: center;
 }
 
 .container {
-  margin: 0 3rem;
+  margin: 0 1rem;
 }
 
 .info-view-container {
@@ -18,17 +17,13 @@ header {
 }
 
 .links {
-  margin-right: 1rem;
-  align-self: center;
+  display: flex;
+  justify-content: center;
 }
 
 .breeds-link,
 .fact-link {
   padding-right: 1rem;
-}
-
-.title {
-  margin-left: 1rem;
 }
 
 .view-title {
@@ -37,8 +32,6 @@ header {
 }
 
 img {
-  padding: 0 2.5rem;
-  height: 13rem;
   margin-bottom: 2rem;
   width: 100%;
   object-fit: contain;
@@ -89,12 +82,12 @@ h2 {
 }
 
 .info-des {
-  margin: 0 2.5rem;
+  margin: 0 0.5rem;
 }
 
 .fact {
   text-align: center;
-  padding: 3.75rem 7.5rem;
+  padding: 3.75rem 0.5rem;
   line-height: 1.75rem;
 }
 
@@ -121,6 +114,7 @@ h2 {
 
   .links {
     margin-right: 4rem;
+    align-items: center;
   }
 
   .col-third {
@@ -165,5 +159,12 @@ h2 {
 
   .fact {
     padding-bottom: 5rem;
+    margin: auto;
+    width: 30rem;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
   }
 }
