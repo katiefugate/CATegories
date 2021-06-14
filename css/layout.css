@@ -95,9 +95,24 @@ h2 {
   padding-top: 2rem;
 }
 
+.no-fav {
+  text-align: center;
+  margin-top: 7rem;
+}
+
 .button-container {
   text-align: center;
   padding-top: 2rem;
+}
+
+.loading,
+.breeds-error {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+h4 {
+  text-align: center;
 }
 
 @media screen and (min-width: 768px) {

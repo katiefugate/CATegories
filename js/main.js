@@ -8,12 +8,17 @@ var favContainer = document.querySelector('.fav.container');
 var factView = document.querySelector('.fact-view');
 var factButton = document.querySelector('.fact-button');
 var fact = document.querySelector('.fact');
+var breedsError = document.querySelector('.breeds-error');
 var catData = null;
 
+var loading = document.createElement('h4');
+loading.textContent = 'Loading...';
+breedsView.appendChild(loading);
 var catbreeds = new XMLHttpRequest();
 catbreeds.open('GET', 'https://api.thecatapi.com/v1/breeds?attach_breed=0');
 catbreeds.setRequestHeader('x-api-key', '13ac2e7c-3a0a-4430-9b8f-e916a6297cd6');
 catbreeds.addEventListener('load', function () {
+  breedsError.textContent = '';
   var catBreedsArr = JSON.parse(catbreeds.response);
   catData = catBreedsArr;
   for (var i = 0; i < catBreedsArr.length; i++) {
@@ -22,6 +27,10 @@ catbreeds.addEventListener('load', function () {
       infoViews.className = 'info-views';
     }
   }
+  loading.textContent = '';
+});
+catbreeds.addEventListener('error', function () {
+  breedsError.textContent = 'Connection to the server was lost. Please try again.';
 });
 catbreeds.send();
 
@@ -251,6 +260,13 @@ function linksHandler(event) {
     data.view = 'breeds';
   } else if (event.target.className === 'fav-link' || event.target.className === 'fas fa-star link-star') {
     favView.className = 'fav-view';
+    var noFav = document.querySelector('.no-fav');
+    if (!data.favorites[0]) {
+      noFav.className = 'no-fav';
+    } else {
+      noFav.className = 'no-fav hidden';
+    }
+
     infoViews.className = 'info-views hidden';
     breedsView.className = 'breeds-view hidden';
     factView.className = 'fact-view hidden';
@@ -294,15 +310,24 @@ function contentLoadHandler(event) {
 
 window.addEventListener('DOMContentLoaded', contentLoadHandler);
 
+var factReq = false;
 function factButtonHandler(event) {
-  var catFact = new XMLHttpRequest();
-  catFact.open('GET', 'https://catfact.ninja/fact?max_length=140');
-  catFact.addEventListener('load', function () {
-    var catFactObj = JSON.parse(catFact.response);
-    var newFact = catFactObj.fact;
-    fact.textContent = newFact;
-  });
-  catFact.send();
+  fact.textContent = 'Loading...';
+  if (factReq === false) {
+    var catFact = new XMLHttpRequest();
+    catFact.open('GET', 'https://catfact.ninja/fact?max_length=140');
+    catFact.addEventListener('load', function () {
+      var catFactObj = JSON.parse(catFact.response);
+      var newFact = catFactObj.fact;
+      fact.textContent = newFact;
+      factReq = false;
+    });
+    catFact.addEventListener('error', function () {
+      fact.textContent = 'Connection to the server was lost. Please try again.';
+    });
+    catFact.send();
+    factReq = true;
+  }
 }
 
 factButton.addEventListener('click', factButtonHandler);
