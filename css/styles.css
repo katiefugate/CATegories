@@ -11,7 +11,8 @@ header {
 h2,
 .fact,
 .fact-button,
-.fact-link {
+.fact-link,
+.breeds-error {
   font-family: 'rum raisin', sans-serif;
 }
 
