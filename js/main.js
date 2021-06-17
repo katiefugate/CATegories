@@ -9,6 +9,7 @@ var factView = document.querySelector('.fact-view');
 var factButton = document.querySelector('.fact-button');
 var fact = document.querySelector('.fact');
 var breedsError = document.querySelector('.breeds-error');
+var noFav = document.querySelector('.no-fav');
 var catData = null;
 
 var loading = document.createElement('h4');
@@ -243,6 +244,9 @@ function getInfo(event) {
       if (data.favorites[i].name === event.target.dataset.name) {
         data.favorites.splice(i, 1);
         favList[i].remove();
+        if (favList.length === 1) {
+          noFav.className = 'no-fav';
+        }
         event.target.className = 'far fa-star';
       }
     }
@@ -260,7 +264,6 @@ function linksHandler(event) {
     data.view = 'breeds';
   } else if (event.target.className === 'fav-link' || event.target.className === 'fas fa-star link-star') {
     favView.className = 'fav-view';
-    var noFav = document.querySelector('.no-fav');
     if (!data.favorites[0]) {
       noFav.className = 'no-fav';
     } else {
@@ -312,8 +315,8 @@ window.addEventListener('DOMContentLoaded', contentLoadHandler);
 
 var factReq = false;
 function factButtonHandler(event) {
-  fact.textContent = 'Loading...';
   if (factReq === false) {
+    fact.textContent = 'Loading...';
     var catFact = new XMLHttpRequest();
     catFact.open('GET', 'https://catfact.ninja/fact?max_length=140');
     catFact.addEventListener('load', function () {
@@ -324,6 +327,7 @@ function factButtonHandler(event) {
     });
     catFact.addEventListener('error', function () {
       fact.textContent = 'Connection to the server was lost. Please try again.';
+      factReq = false;
     });
     catFact.send();
     factReq = true;
