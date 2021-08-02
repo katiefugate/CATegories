@@ -2,7 +2,7 @@
 
 A dynamic HTML, CSS, and JavaScript solo app for users to find information on different breeds of cats.
 
-[LIVE](https://katiefugate.github.io/ajax-project/)
+[LIVE](https://katiefugate.github.io/CATegories/)
 
 ## Features
 
